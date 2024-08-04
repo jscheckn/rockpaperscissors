@@ -1,4 +1,6 @@
-
+const buttons = document.querySelectorAll('.allbuttons');
+const results = document.getElementById("displayres");
+const score = document.getElementById("displayscore");
 
 function getComputerChoice(){
     let num = Math.random();
@@ -11,65 +13,76 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let answer = prompt("What do you choose?");
-    return answer;
-}
-
-
 function playGame(){
-    let humanScore, computerScore = 0;
+    let humanScore = 0, computerScore = 0;
     function playRound(humanChoice, computerChoice){
         humanChoice = humanChoice.toString().toLowerCase();
         computerChoice = computerChoice.toString().toLowerCase();
+        score.textContent =   `Computer: ${computerScore} - Player: ${humanScore}`;
         if(humanChoice == "rock"){
             if(computerChoice == "rock"){
-                console.log("Tie! Try again");
+                results.textContent = "You Tie! Try Again!";
             }else if(computerChoice == "scissors"){
-                console.log("You win!");
-                humanScore+=1;
+                results.textContent = "You Win!";
+                score.textContent = "hi";
+                playerScore+=1;
+                
             }else{
-                console.log("You lose!");
+                results.textContent = "You Lose!";
                 computerScore+=1;
+                
             }
         }else if(humanChoice == "scissors"){
             if(computerChoice == "scissors"){
-                console.log("Tie! Try again");
+                results.textContent = "You Tie! Try Again!";
             }else if(computerChoice == "paper"){
-                console.log("You win!");
+                results.textContent = "You Win!";
                 humanScore+=1;
+                
             }else{
-                console.log("You lose!");
+                results.textContent = "You Lose!";
                 computerScore+=1;
+                
             }
         }else{
             if(computerChoice == "paper"){
-                console.log("Tie! Try again");
+                results.textContent = "You Tie! Try Again!";
             }else if(computerChoice == "rock"){
-                console.log("You win!");
+                results.textContent = "You Win!";
                 humanScore+=1;
+                
             }else{
-                console.log("You lose!");
+                results.textContent = "You Lose!";
                 computerScore+=1;
+                
             }
         }
+        score.textContent =   `Computer: ${computerScore} - Player: ${humanScore}`;
     }
-    let computerSelection = getComputerChoice();
-    let humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
-    computerSelection = getComputerChoice();
-    humanSelection = getHumanChoice();
-    playRound(humanSelection, computerSelection);
+    buttons.forEach(btn => {
+        btn.addEventListener("click", () => playRound(btn.textContent, getComputerChoice()));
+            
+    })
+        
+    
+    
     
 }
 
 playGame();
+
+/*let humanSelection = 
+    let computerSelection = getComputerChoice();
+    playRound(humanSelection, computerSelection);
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection);
+    computerSelection = getComputerChoice();
+    humanSelection = getHumanChoice();
+    playRound(humanSelection, computerSelection); */
